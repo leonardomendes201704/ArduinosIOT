@@ -66,9 +66,7 @@ void setup() {
     reconnect();
   }
 
-//  sendMQTTSensorLux1DiscoveryMsg();
-  
-  String LuxSensor = "{\"unique_id\": \"cc849ec8-748e-11ed-a1eb-0242ac120002\", \"icon\":\"mdi:sun-wireless\", \"device_class\":\"temperature\", \"unit_of_measurement\": \"lux\", \"name\": \"MQTT_Sensor_Lux_1\", \"state_topic\": \"homeassistant/sensor/lux/MQTT_Sensor_Lux_1/value\"}";
+  String LuxSensor = "{\"unique_id\": \"cc849ec8-748e-11ed-a1eb-0242ac120002\", \"icon\":\"emdi:sun-wireless\", \"device_class\":\"temperature\", \"unit_of_measurement\": \"lux\", \"name\": \"MQTT_Sensor_Lux_1\", \"state_topic\": \"homeassistant/sensor/lux/MQTT_Sensor_Lux_1/value\"}";
   
   statusPub = ConexaoMQTT.publish("homeassistant/sensor/lux/config",LuxSensor.c_str());
   Serial.print("Status Pub:");
@@ -79,7 +77,7 @@ void setup() {
   Serial.print("Status Pub:");
   Serial.println(statusPub);
   statusPub = ConexaoMQTT.publish("homeassistant/sensor/lux/MQTT_Sensor_Lux_1/value","1500");
-    Serial.print("Status Pub:");
+  Serial.print("Status Pub:");
   Serial.println(statusPub);
 }
 
@@ -97,28 +95,3 @@ void loop() {
   ConexaoMQTT.publish("homeassistant/sensor/lux/MQTT_Sensor_Lux_1/value",valor);
   delay(5000);
 }
-
-
-
-
-//
-//void sendMQTTSensorLux1DiscoveryMsg() {
-//  String discoveryTopic = "homeassistant/sensor/Quarto/MQTT_Sensor_Lux_1/config";
-//
-//  DynamicJsonDocument doc(1024);
-//  char buffer[256];
-//
-//  doc["name"] = "MQTT Sensor LUX 1";
-//  doc["stat_t"]   = stateTopic;
-//  doc["unit_of_meas"] = "lux";
-//  doc["dev_cla"] = "illuminance";
-//  doc["frc_upd"] = true;
-//  doc["val_tpl"] = "{{ value_json.illuminance|default(0) }}";
-//
-//  size_t n = serializeJson(doc, buffer);
-//  
-//  Serial.println(discoveryTopic.c_str());
-//  Serial.println(buffer);
-//  
-//  ConexaoMQTT.publish(discoveryTopic.c_str(), buffer, n);
-//}
